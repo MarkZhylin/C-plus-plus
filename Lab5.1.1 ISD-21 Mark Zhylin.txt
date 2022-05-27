@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Person
+{private:
+	string name;
+	int age;
+	string LastName;
+public:
+	
+	string getName() {
+		return name;
+	}
+	string getLastName() {
+		return LastName;
+	}
+	int getAge() {
+		return age;
+	}
+	void setName() {
+		cin>> name;
+	}
+	void setAge() {
+		cin>> age;
+	}
+	void setLastName() {
+	   cin>>LastName;
+	}
+};
+void print(Person* person)
+{
+	cout << person->getName() << "" << person->getLastName() << " is "<< person->getAge() << " years old" << endl;
+}
+
+int main()
+{
+	Person person;
+	person.setName();
+	person.setLastName();
+	person.setAge();
+	cout << "Meet " << person.getName() << "" << person.getLastName() <<"\t";
+	cout << "\n";
+	print(&person);
+	return 0;
+}

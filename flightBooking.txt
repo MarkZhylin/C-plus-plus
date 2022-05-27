@@ -1,0 +1,96 @@
+#include <iostream>
+
+using namespace std;
+class FlightBooking {
+public:
+void add(int n);
+void cancel(int n);
+FlightBooking(int id, int capacity, int reserved);
+void printStatus();
+bool reserveSeats(int number_ob_seats);
+bool canceReservations(int number_ob_seats);
+private:
+int id;
+int capacity;
+int reserved;
+};
+void FlightBooking::add(int n){
+    this->reserved+=n;
+}
+void FlightBooking::cancel(int n){
+    this->reserved-=n;
+}
+void FlightBooking::printStatus()
+{
+double percent = 0;
+
+
+		percent = 100.0 * ((double)this->reserved / this->capacity);
+		printf("Flight %d: %d/%d (%lf) seats taken", this->id, this->reserved, this->capacity, percent);
+
+
+}
+bool FlightBooking::reserveSeats(int number_ob_seats)
+{
+if(105.0>=(100.0 * ((double)(this->reserved+number_ob_seats) / this->capacity))){
+    return true;
+}
+return false;
+}
+bool FlightBooking::canceReservations(int number_ob_seats)
+{
+if(reserved-number_ob_seats>=1){
+    return true;
+}
+return false;
+}
+FlightBooking::FlightBooking(int id, int capacity, int reserved)
+{
+this->id = id;
+	this->capacity=capacity;
+	this->reserved=reserved;
+	if (this->reserved > this->capacity)
+	{
+		reserved = 0;
+		cout << "Cannot perform this operation \n";
+	}
+}
+int main() {
+int reserved = 0,
+capacity = 0;
+cout << "Provide flight capacity: ";
+cin >> capacity;
+cout << "Provide number of reserved seats: ";
+cin >> reserved;
+FlightBooking booking(1, capacity, reserved);
+string command = "";
+while (command != "quit")
+{
+booking.printStatus();
+cout << "Action?: ";
+		cin >> command;
+		if (command == "quit")
+			break;
+		cout << "Enter the number: ";
+		int numb;
+		if (command == "add")
+		{
+			cin >> numb;
+			if(booking.reserveSeats(numb))
+			   booking.add(numb);
+			
+		}
+		else if (command == "cancel")
+		{
+			cin >> numb;
+			if(booking.canceReservations(numb))
+			    booking.cancel(numb);
+			
+		}
+		else
+		{
+			printf("Cannot perform this operation");
+		}
+}
+return 0;
+}
